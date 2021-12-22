@@ -8,7 +8,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return 'This is the list of products';
+        //Laravel permite buscar entre carpetas de vistas mediante un punto 
+        return view('products.index');
     }
 
 
@@ -24,7 +25,7 @@ class ProductController extends Controller
 
     public function show($product)
     {
-        return "Showing product with id {$product}";
+        return view('products.show', ['product' => $product]);
     }
 
     public function edit($product)
