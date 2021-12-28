@@ -30,8 +30,11 @@ class ProductController extends Controller
     public function show($product)
     {
         $selected = Product::findOrFail($product);
-        dd($selected);
-        return view('products.show');
+        //dd($selected);
+        return view('products.show')->with([
+            'product' => $selected,
+            'html' => '<h2>Hola</h2>'
+        ]);
     }
 
     public function edit($product)
