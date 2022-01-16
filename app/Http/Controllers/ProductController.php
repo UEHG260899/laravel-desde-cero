@@ -21,6 +21,13 @@ class ProductController extends Controller
 
     public function store()
     {
+        if(request()->status == 'available' && request()->stock == 0){
+            //flash solo esta disponible hasta la siguiente petición
+            session()->flash('error', 'Can´t be available with stock 0');
+            return redirect()->back();
+        }
+
+        session()->forget('error');
         $product = Product::create(request()->all());
         //return redirect()->back();
         //return redirect()->action('MainController@main');
