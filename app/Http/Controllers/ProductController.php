@@ -22,7 +22,9 @@ class ProductController extends Controller
     public function store()
     {
         $product = Product::create(request()->all());
-        return $product;
+        //return redirect()->back();
+        //return redirect()->action('MainController@main');
+        return redirect()->route('products.index');
     }
 
     public function create()
@@ -51,14 +53,14 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return $product;
+        return redirect()->route('products.index');
     }
 
     public function destroy($product)
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        return $product;
+        return redirect()->route('products.index');
     }
 
 }
