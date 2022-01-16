@@ -2,7 +2,8 @@
 
 @section('content')
     <h1>Lista de productos</h1>
-    
+    <a href="{{ route('products.create') }}" class="btn btn-success">Create</a>
+
     @empty($products)
         <div class="alert alert-warning">
             The list of products is empty
@@ -17,7 +18,8 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Stock</th>
-                        <th>status</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +31,15 @@
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->stock }}</td>
                             <td>{{ $product->status }}</td>
+                            <td>
+                                <a href="{{ route('products.show', ['product' => $product->id]) }}" class="btn btn-link">Show</a>
+                                <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn btn-link">Edit</a>
+                                <form method="post" action="{{ route('products.destroy', ['product' => $product->id]) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-link" type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
