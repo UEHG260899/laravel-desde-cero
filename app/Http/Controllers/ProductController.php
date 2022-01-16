@@ -32,16 +32,18 @@ class ProductController extends Controller
         request()->validate($rules);
 
         if(request()->status == 'available' && request()->stock == 0){
-            //flash solo esta disponible hasta la siguiente petición
-            session()->flash('error', 'Can´t be available with stock 0');
-            return redirect()->back()->withInput(request()->all());
+            return redirect()
+                    ->back()
+                    ->withInput(request()->all())
+                    ->withErrors('Can´t be available with stock 0');
+                    //withErrors manda un valor a la variable global errors
         }
 
-        session()->forget('error');
         $product = Product::create(request()->all());
-        //return redirect()->back();
-        //return redirect()->action('MainController@main');
-        return redirect()->route('products.index');
+        return redirect()
+                ->route('products.index')
+                ->withSuccess("Product with id: {$product->id} has been created");
+        //Si se usa with<Palabra>, manda un elemento Palabra a session
     }
 
     public function create()
@@ -79,21 +81,26 @@ class ProductController extends Controller
         request()->validate($rules);
 
         if(request()->status == 'available' && request()->stock == 0){
-            //flash solo esta disponible hasta la siguiente petición
-            session()->flash('error', 'Can´t be available with stock 0');
-            return redirect()->back()->withInput(request()->all());
+            return redirect()
+                    ->back()
+                    ->withInput(request()->all())
+                    ->withErrors('Can´t be available with stock 0');
         }
 
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return redirect()->route('products.index');
+        return redirect()
+                ->route('products.index')
+                ->withSuccess("Product with id: {$product->id} has been updated");
     }
 
     public function destroy($product)
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()
+                ->route('products.index')
+                ->withSuccess("Product with id: {$product->id} has been deleted");
     }
 
 }
