@@ -12,7 +12,7 @@ class Product extends Model
     //Permite llenar de manera directa todos estos atributos
     protected $fillable = [
         'title',
-        'decription',
+        'description',
         'price',
         'stock',
         'status'
