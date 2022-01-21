@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Lista de productos</h1>
-    <a href="{{ route('products.create') }}" class="btn btn-success">Create</a>
+    <a href="{{ route('products.create') }}" class="btn btn-success mb-3">Create</a>
 
     @empty($products)
         <div class="alert alert-warning">
@@ -34,7 +34,7 @@
                             <td>
                                 <a href="{{ route('products.show', ['product' => $product->id]) }}" class="btn btn-link">Show</a>
                                 <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn btn-link">Edit</a>
-                                <form method="post" action="{{ route('products.destroy', ['product' => $product->id]) }}">
+                                <form method="post" action="{{ route('products.destroy', ['product' => $product->id]) }}" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-link" type="submit">Delete</button>
