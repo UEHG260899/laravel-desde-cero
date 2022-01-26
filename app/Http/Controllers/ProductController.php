@@ -51,12 +51,12 @@ class ProductController extends Controller
         return view("products.create");
     }
 
-    public function show($product)
+    public function show(Product $product)
     {
-        $selected = Product::findOrFail($product);
+        //$selected = Product::findOrFail($product);
         //dd($selected);
         return view('products.show')->with([
-            'product' => $selected,
+            'product' => $product,
             'html' => '<h2>Hola</h2>'
         ]);
     }
@@ -94,9 +94,8 @@ class ProductController extends Controller
                 ->withSuccess("Product with id: {$product->id} has been updated");
     }
 
-    public function destroy($product)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($product);
         $product->delete();
         return redirect()
                 ->route('products.index')
