@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('products', 'ProductController');
+
 Route::get('/', "MainController@main")->name('main');
 
-Route::get('products', 'ProductController@index')->name('products.index');
+/*Route::get('products', 'ProductController@index')->name('products.index');
 
 Route::post('products', 'ProductController@store')->name('products.store');
 
@@ -28,7 +30,7 @@ Route::get('products/{product}/edit', 'ProductController@edit')->name('products.
 //Permite a Laravel ejecutar esta ruta cuando se usan algunas de las que estan en el arreglo
 Route::match(['put', 'patch'], 'products/{product}', 'ProductController@update')->name('products.update');
 
-Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
+Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');*/
 
 
 Auth::routes();
